@@ -5,6 +5,7 @@
 // - multiple highscores
 // - number of tries
 // - cheerful effects on correct guess
+// - further refactoring
 
 // Initial values
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
@@ -43,7 +44,9 @@ document.querySelector(".check").addEventListener("click", function () {
   else if (guess !== secretNumber) {
     if (score > 1) {
       displayMessage(
-        guess > secretNumber ? "Too high!...(Hint: ?)" : "Too low!...(Hint: ?)"
+        guess > secretNumber
+          ? "Too high!...(? hides a hint)"
+          : "Too low!...(? hides a hint)"
       );
       score--;
       document.querySelector(".score").textContent = score;
