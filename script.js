@@ -71,9 +71,37 @@ document.querySelector(".again").addEventListener("click", function () {
 const help = document.querySelector(".number");
 help.addEventListener("mouseover", function () {
   const guess = Number(document.querySelector(".guess").value);
-  if (secretNumber < guess && secretNumber < 5) {
-    document.querySelector(".number").textContent = "<5";
+  let target = document.querySelector(".number");
+
+  //by switch
+  switch(true) {
+    case guess === 0: target.textContent = "Set guessing number"; 
+      break;
+    case guess < secretNumber: target.textContent = ">" + guess; 
+      break;
+    case guess > secretNumber: target.textContent = "<" + guess; 
+      break;
+    case guess === secretNumber: target.textContent = "WHOA";
+      break;
   }
+
+  // //by ifs, return exit function without continue with rest of code.
+  // if(guess === 0) {
+  //   target.textContent = "Set guessing number";
+  //   return;
+  // }
+  // if(guess < secretNumber) {
+  //   target.textContent = ">" + guess; 
+  //   return;
+  // }
+  // if(guess > secretNumber) {
+  //   target.textContent = "<" + guess; 
+  //   return;
+  // }
+  // if(guess === secretNumber) {
+  //   target.textContent = "WHOA";
+  //   return;
+  // } 
 });
 help.addEventListener("mouseout", function () {
   document.querySelector(".number").textContent = "?";
