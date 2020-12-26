@@ -14,8 +14,6 @@ let highscore = 0;
 const displayMessage = function (message) {
   document.querySelector(".message").textContent = message;
 };
-const guess = Number(document.querySelector(".guess").value);
-console.log(guess, typeof guess);
 
 // Check! button
 // Button to check the users guess
@@ -69,29 +67,42 @@ document.querySelector(".again").addEventListener("click", function () {
   document.querySelector(".guess").value = "";
 });
 
-// Help? (WIP)
-// - if mouseover after correct guess, return secretNumber
+// Help?
 const help = document.querySelector(".number");
 help.addEventListener("mouseover", function () {
   const guess = Number(document.querySelector(".guess").value);
+  let target = document.querySelector(".number");
 
-  if (
-    secretNumber < guess &&
-    secretNumber < 5 &&
-    secretNumber < 10 &&
-    guess !== 0
-  ) {
-    document.querySelector(".number").textContent = "?<5";
+  //by switch
+  switch(true) {
+    case guess === 0: target.textContent = "Set guessing number"; 
+      break;
+    case guess < secretNumber: target.textContent = ">" + guess; 
+      break;
+    case guess > secretNumber: target.textContent = "<" + guess; 
+      break;
+    case guess === secretNumber: target.textContent = "WHOA";
+      break;
   }
-  // } else if (secretNumber > guess && secretNumber > 5 && secretNumber < 10) {
-  //   document.querySelector(".number").textContent = "?>5";
-  // } else if (secretNumber > guess && secretNumber > 10) {
-  //   document.querySelector(".number").textContent = "?>10";
-  // } else if (secretNumber < guess && secretNumber < 10) {
-  //   document.querySelector(".number").textContent = "?<10";
-  // }
-});
 
+  // //by ifs, return exit function without continue with rest of code.
+  // if(guess === 0) {
+  //   target.textContent = "Set guessing number";
+  //   return;
+  // }
+  // if(guess < secretNumber) {
+  //   target.textContent = ">" + guess; 
+  //   return;
+  // }
+  // if(guess > secretNumber) {
+  //   target.textContent = "<" + guess; 
+  //   return;
+  // }
+  // if(guess === secretNumber) {
+  //   target.textContent = "WHOA";
+  //   return;
+  // } 
+});
 help.addEventListener("mouseout", function () {
   document.querySelector(".number").textContent = "?";
 });
