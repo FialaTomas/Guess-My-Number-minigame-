@@ -68,6 +68,11 @@ h1 {
   left: 50%;
   transform: translate(-50%, 50%);
 }
+.number:hover {
+  background-color: #222;
+  color: #eee;
+  font-size: 5rem;
+}
 
 .between {
   font-size: 1.4rem;

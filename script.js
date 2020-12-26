@@ -66,3 +66,15 @@ document.querySelector(".again").addEventListener("click", function () {
   document.querySelector(".number").textContent = "?";
   document.querySelector(".guess").value = "";
 });
+
+// Help?
+const help = document.querySelector(".number");
+help.addEventListener("mouseover", function () {
+  const guess = Number(document.querySelector(".guess").value);
+  if (secretNumber < guess && secretNumber < 5) {
+    document.querySelector(".number").textContent = "<5";
+  }
+});
+help.addEventListener("mouseout", function () {
+  document.querySelector(".number").textContent = "?";
+});
