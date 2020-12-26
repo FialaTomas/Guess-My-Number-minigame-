@@ -1,24 +1,6 @@
-"use strict";
-// Guess My Number! minigame
-
-// To add:
-// - multiple highscores
-// - number of tries
-// - cheerful effects on correct guess
-
-// Initial values
-let secretNumber = Math.trunc(Math.random() * 20) + 1;
-let score = 20;
-let highscore = 0;
-
-const displayMessage = function (message) {
-  document.querySelector(".message").textContent = message;
-};
-
-// Check! button
-// Button to check the users guess
-document.querySelector(".check").addEventListener("click", function () {
-  const guess = Number(document.querySelector(".guess").value);
+//   User guess by ENTER
+  document.querySelector(".check").addEventListener("keydown", function(e){
+  if (e.key === "Enter"){  const guess = Number(document.querySelector(".guess").value);
   console.log(guess, typeof guess);
 
   //   User guess
@@ -51,18 +33,6 @@ document.querySelector(".check").addEventListener("click", function () {
       displayMessage("No more guesses, try again!");
       document.querySelector(".score").textContent = 0;
     }
-  }
-});
 
-// Again! button
-// Button to reset the game without losing progress in Highscore
-document.querySelector(".again").addEventListener("click", function () {
-  score = 20;
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
-  displayMessage("Start guessing...");
-  document.querySelector(".score").textContent = score;
-  document.querySelector("body").style.backgroundColor = "#222";
-  document.querySelector(".number").style.width = "15rem";
-  document.querySelector(".number").textContent = "?";
-  document.querySelector(".guess").value = "";
-});
+  }
+})
