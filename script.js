@@ -19,17 +19,15 @@ const displayMessage = function (message) {
 // Button to check the users guess
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
-  console.log(guess, typeof guess);
 
   //   User guess
   //   Incorrect input
   if (!guess) {
-    displayMessage("Not a number!");
+    displayMessage("Need a number!");
   }
   //   Correct guess
   else if (guess === secretNumber) {
     displayMessage("Correct!");
-    //  Changes background color to green if the guess is correct
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").textContent = secretNumber;
     document.querySelector(".number").style.width = "30rem";
@@ -44,7 +42,9 @@ document.querySelector(".check").addEventListener("click", function () {
   // When guess is wrong (using combination of if/else and ternary operator)
   else if (guess !== secretNumber) {
     if (score > 1) {
-      displayMessage(guess > secretNumber ? "Too high!" : "Too low!");
+      displayMessage(
+        guess > secretNumber ? "Too high!...(Hint: ?)" : "Too low!...(Hint: ?)"
+      );
       score--;
       document.querySelector(".score").textContent = score;
     } else {
@@ -67,42 +67,42 @@ document.querySelector(".again").addEventListener("click", function () {
   document.querySelector(".guess").value = "";
 });
 
-// Help?
+// ? (hint)
+// When cursor move over ? the game provides a hint
 const help = document.querySelector(".number");
 help.addEventListener("mouseover", function () {
   const guess = Number(document.querySelector(".guess").value);
   let target = document.querySelector(".number");
-
-  //by switch
-  switch(true) {
-    case guess === 0: target.textContent = "Set guessing number"; 
+  switch (true) {
+    case guess === 0:
+      target.textContent = "?";
       break;
-    case guess < secretNumber: target.textContent = ">" + guess; 
+    case guess === secretNumber:
+      target.textContent = secretNumber;
       break;
-    case guess > secretNumber: target.textContent = "<" + guess; 
+    case secretNumber < guess && secretNumber < 15:
+      target.textContent = "<15";
       break;
-    case guess === secretNumber: target.textContent = "WHOA";
+    case secretNumber > guess && secretNumber > 15:
+      target.textContent = ">15";
+      break;
+    case secretNumber < guess && secretNumber < 10:
+      target.textContent = "<10";
+      break;
+    case secretNumber > guess && secretNumber > 10:
+      target.textContent = ">10";
+      break;
+    case secretNumber < guess && secretNumber < 5:
+      target.textContent = "<5";
+      break;
+    case secretNumber > guess && secretNumber > 5:
+      target.textContent = ">5";
       break;
   }
-
-  // //by ifs, return exit function without continue with rest of code.
-  // if(guess === 0) {
-  //   target.textContent = "Set guessing number";
-  //   return;
-  // }
-  // if(guess < secretNumber) {
-  //   target.textContent = ">" + guess; 
-  //   return;
-  // }
-  // if(guess > secretNumber) {
-  //   target.textContent = "<" + guess; 
-  //   return;
-  // }
-  // if(guess === secretNumber) {
-  //   target.textContent = "WHOA";
-  //   return;
-  // } 
 });
+
 help.addEventListener("mouseout", function () {
-  document.querySelector(".number").textContent = "?";
+  const guess = Number(document.querySelector(".guess").value);
+  if (guess !== secretNumber)
+    document.querySelector(".number").textContent = "?";
 });
