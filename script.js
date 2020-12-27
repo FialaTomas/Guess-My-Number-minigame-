@@ -7,6 +7,9 @@
 // - cheerful effects on correct guess
 // - further refactoring
 
+// Known issues:
+// - further user input not denied.. after correct guess causing the game to show a gray box instead of a ? (probably caused by line 48-49)
+
 // Initial values
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
@@ -20,6 +23,7 @@ const displayMessage = function (message) {
 // Button to check the users guess
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
+  document.querySelector(".number").textContent = "?";
 
   //   User guess
   //   Incorrect input
@@ -42,6 +46,10 @@ document.querySelector(".check").addEventListener("click", function () {
 
   // When guess is wrong (using combination of if/else and ternary operator)
   else if (guess !== secretNumber) {
+    document.querySelector(".number").textContent = "!";
+    document.querySelector(".number").style.backgroundColor = "#333";
+    document.querySelector(".number").textContent.fontcolor = "#eee";
+    // document.querySelector(".number").style.
     if (score > 1) {
       displayMessage(
         guess > secretNumber

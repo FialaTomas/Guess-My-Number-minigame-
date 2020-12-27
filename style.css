@@ -68,8 +68,8 @@ h1 {
   left: 50%;
   transform: translate(-50%, 50%);
 }
-.number:hover {
-}
+/* .number:hover {
+} */
 
 .between {
   font-size: 1.4rem;
